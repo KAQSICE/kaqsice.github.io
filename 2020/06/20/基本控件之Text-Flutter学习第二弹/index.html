@@ -1,0 +1,355 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>基本控件之Text - Flutter学习第二弹 | TranceD的小屋</title><meta name="keywords" content="flutter,dart"><meta name="author" content="TranceD"><meta name="copyright" content="TranceD"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="了解一下Text的基本用法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基本控件之Text - Flutter学习第二弹">
+<meta property="og:url" content="http://kaqsice.github.io/2020/06/20/%E5%9F%BA%E6%9C%AC%E6%8E%A7%E4%BB%B6%E4%B9%8BText-Flutter%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%BA%8C%E5%BC%B9/index.html">
+<meta property="og:site_name" content="TranceD的小屋">
+<meta property="og:description" content="了解一下Text的基本用法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost/img/flutter_blog.png">
+<meta property="article:published_time" content="2020-06-20T02:34:15.000Z">
+<meta property="article:modified_time" content="2020-10-25T12:51:18.012Z">
+<meta property="article:author" content="TranceD">
+<meta property="article:tag" content="flutter">
+<meta property="article:tag" content="dart">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost/img/flutter_blog.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://kaqsice.github.io/2020/06/20/%E5%9F%BA%E6%9C%AC%E6%8E%A7%E4%BB%B6%E4%B9%8BText-Flutter%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%BA%8C%E5%BC%B9/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@800&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '4.2.1',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2020-10-25 20:51:18'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {
+  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }
+})()</script><meta name="generator" content="Hexo 4.2.1"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/coolsheen.gif" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">21</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">10</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">4</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/2020/05/20/%E5%85%B3%E4%BA%8E_tranced%E7%9A%84%E5%B0%8F%E5%B1%8B_/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基本控件之text"><span class="toc-text"> 基本控件之Text</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#textalign"><span class="toc-text"> textAlign</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#textdirection"><span class="toc-text"> textDirection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#softwrap"><span class="toc-text"> softWrap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#maxlines"><span class="toc-text"> maxLines</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#overflow"><span class="toc-text"> overflow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#style"><span class="toc-text"> style</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-text"> 小结</span></a></li></ol></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/kaqsice/ImgHost/img/flutter_blog.png)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">TranceD的小屋</a></span><span id="menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/2020/05/20/%E5%85%B3%E4%BA%8E_tranced%E7%9A%84%E5%B0%8F%E5%B1%8B_/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">基本控件之Text - Flutter学习第二弹</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-06-20T02:34:15.000Z" title="发表于 2020-06-20 10:34:15">2020-06-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-10-25T12:51:18.012Z" title="更新于 2020-10-25 20:51:18">2020-10-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%A4%A7%E6%88%98Flutter%E7%B3%BB%E5%88%97/">大战Flutter系列</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">898</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="基本控件之text"><a class="markdownIt-Anchor" href="#基本控件之text"></a> 基本控件之Text</h1>
+<p>和原生安卓开发一样，flutter也需要使用各种控件(Widget)来组成布局，之前已经搭建好flutter环境并自己敲了一个简单的HelloWorld，其中就使用了基本控件<code>Text</code>。总之想要入门flutter，不会一些基础控件的使用方法是不行的，那今天就来了解一下基本的控件<code>Text</code>的用法。</p>
+<p>新建一个项目<code>widget_test</code>来测试基础组件的用法，先敲出一个HelloWorld的框架</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'package:flutter/material.dart'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      title: <span class="string">'组件测试用app'</span>,</span><br><span class="line">      home: Scaffold(</span><br><span class="line">        appBar: AppBar(</span><br><span class="line">          title: Text(<span class="string">'这是一个组件测试用app'</span>),</span><br><span class="line">        ),</span><br><span class="line">        body: Center(</span><br><span class="line">          child: Text(<span class="string">'这是一个Text组件'</span>),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  runApp(MyApp());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost/img/image-20200623162304777.png" alt="Text组件测试" /></p>
+<p>观察源码可以发现这个app中有两处使用了Text控件，一个在appBar上面，另一个在中间位置。</p>
+<p>接下来给Text控件加一点属性。</p>
+<h2 id="textalign"><a class="markdownIt-Anchor" href="#textalign"></a> textAlign</h2>
+<p><code>textAlign</code>是文字的对齐格式，例如左右对齐居中对齐等等。这里说一下，加入属性的方式很简单，就是在Text的括号内直接填写参数，如</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Text(<span class="string">'这是一个\n会换行的Text组件'</span>,</span><br><span class="line">     textAlign: TextAlign.left,</span><br><span class="line">),</span><br></pre></td></tr></table></figure>
+<p>这样得到的文字是左对齐的，如图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost/img/image-20200623164403451.png" alt="image-20200623164403451" /></p>
+<p>改成<code>TextAlign.center</code>后就变成居中显示的了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost/img/image-20200623164525549.png" alt="image-20200623164525549" /></p>
+<table>
+<thead>
+<tr>
+<th>TextAlign</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>center</td>
+<td>文字居中对齐</td>
+</tr>
+<tr>
+<td>left</td>
+<td>文字左端对齐</td>
+</tr>
+<tr>
+<td>start</td>
+<td>文字开头对齐</td>
+</tr>
+<tr>
+<td>right</td>
+<td>文字右端对齐</td>
+</tr>
+<tr>
+<td>end</td>
+<td>文字结尾对齐</td>
+</tr>
+<tr>
+<td>justify</td>
+<td>文字两端贴边对齐</td>
+</tr>
+</tbody>
+</table>
+<h2 id="textdirection"><a class="markdownIt-Anchor" href="#textdirection"></a> textDirection</h2>
+<p><code>textDirection</code>属性和<code>textAlign</code>属性比较相似，有<code>ltr</code>和<code>rtl</code>两种情况</p>
+<table>
+<thead>
+<tr>
+<th>TextDirection</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ltr</td>
+<td>文字左端对齐(与TextAlign.start类似)</td>
+</tr>
+<tr>
+<td>rtl</td>
+<td>文字右端对齐(与TextAlign.end类似)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="softwrap"><a class="markdownIt-Anchor" href="#softwrap"></a> softWrap</h2>
+<p><code>softWrap</code>指是否自动换行，如果为true就会自动换行，否则不会自动换行，超出行显示的部分会被截断，如</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost/img/image-20200623170124613.png" alt="softWrap: true" /></p>
+<p><img src="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost/img/image-20200623170216914.png" alt="softWrap: false" /></p>
+<h2 id="maxlines"><a class="markdownIt-Anchor" href="#maxlines"></a> maxLines</h2>
+<p><code>maxLines</code>属性是文字控件的最大显示行数，我们设置为1后，就只能够显示一行文字。效果都明白，就不展示了。</p>
+<h2 id="overflow"><a class="markdownIt-Anchor" href="#overflow"></a> overflow</h2>
+<p><code>overflow</code>属性决定了文字超出显示范围时候的截断效果，如我们可以设置截断的地方用省略号来结尾，大部分app里面都有类似的效果</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost/img/image-20200623170746508.png" alt="overflow: TextOverflow.ellipsis" /></p>
+<table>
+<thead>
+<tr>
+<th>overflow</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ellipsis</td>
+<td>省略号</td>
+</tr>
+<tr>
+<td>clip</td>
+<td>直接切断</td>
+</tr>
+<tr>
+<td>fade</td>
+<td>渐变消失</td>
+</tr>
+</tbody>
+</table>
+<h2 id="style"><a class="markdownIt-Anchor" href="#style"></a> style</h2>
+<p><code>style</code>属性是比较复杂的属性，也是比较重要的，在<code>style</code>里面可以设置文字的大小颜色等样式。我们来一个超大绿色字体</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Text(<span class="string">'这是一个超大的绿色Text组件'</span>,</span><br><span class="line">     style: TextStyle(</span><br><span class="line">         fontSize: <span class="number">72.0</span>, <span class="comment">//fontSize要接收一个浮点数</span></span><br><span class="line">         color: Color.fromARGB(<span class="number">255</span>, <span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>),	<span class="comment">//使用ARGB格式颜色</span></span><br><span class="line">     ),</span><br><span class="line">),</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost/img/image-20200623172118470.png" alt="就这种效果" /></p>
+<p>再给她加一个下划虚线</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Text(<span class="string">'这是一个超大的绿色Text组件'</span>,</span><br><span class="line">     style: TextStyle(</span><br><span class="line">         fontSize: <span class="number">72.0</span>, <span class="comment">//fontSize要接收一个浮点数</span></span><br><span class="line">         color: Color.fromARGB(<span class="number">255</span>, <span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>),  <span class="comment">//使用ARGB格式颜色</span></span><br><span class="line">         decoration: TextDecoration.underline, <span class="comment">//下划线</span></span><br><span class="line">         decorationColor: Color.fromARGB(<span class="number">255</span>, <span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>),  <span class="comment">//下划线颜色</span></span><br><span class="line">         decorationStyle: TextDecorationStyle.dashed <span class="comment">//下划线样式，这个是普通虚线</span></span><br><span class="line">     ),</span><br><span class="line">),</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost/img/image-20200623172806889.png" alt="红配绿" /></p>
+<p>也可以改成删除线(<code>TextDecoration.lineThrough</code>)或者上划线(<code>TextDecoration.overline</code>)。样式也有实线点线和虚线等等，就不一一展示了。</p>
+<h2 id="小结"><a class="markdownIt-Anchor" href="#小结"></a> 小结</h2>
+<p>今天了解了一下<code>Text</code>控件的使用方法，和<code>TextView</code>的感觉差不多，但<code>style</code>属性的设置要稍微复杂一些，不去自己敲几遍试试还是掌握的不太牢固。当然了，还有一些其它的<code>Text</code>的属性没有介绍到，不过感觉比较常用的就这些了，其它属性就到官方文档里面看一看就好了。</p>
+<p><img src="https://i.loli.net/2020/06/13/b9uQ7sDJzOxXa8t.png" alt="正在写着什么东西的Pusheen" /></p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">TranceD</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://kaqsice.github.io/2020/06/20/%E5%9F%BA%E6%9C%AC%E6%8E%A7%E4%BB%B6%E4%B9%8BText-Flutter%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%BA%8C%E5%BC%B9/">http://kaqsice.github.io/2020/06/20/%E5%9F%BA%E6%9C%AC%E6%8E%A7%E4%BB%B6%E4%B9%8BText-Flutter%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%BA%8C%E5%BC%B9/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://kaqsice.github.io" target="_blank">TranceD的小屋</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/flutter/">flutter</a><a class="post-meta__tags" href="/tags/dart/">dart</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost/img/flutter_blog.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/07/02/%E5%9F%BA%E6%9C%AC%E6%8E%A7%E4%BB%B6%E4%B9%8BContainer-Flutter%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%89%E5%BC%B9/"><img class="prev-cover" src="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost/img/flutter_blog.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">基本控件之Container - Flutter学习第三弹</div></div></a></div><div class="next-post pull-right"><a href="/2020/06/18/%E5%88%9D%E6%8E%A2Flutter-Flutter%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%BC%B9/"><img class="next-cover" src="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost/img/flutter_blog.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">初探Flutter - Flutter学习第一弹</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/07/03/基本控件之ListView-Flutter学习第五弹/" title="基本控件之ListView - Flutter学习第五弹"><img class="cover" src="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost/img/flutter_blog.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-03</div><div class="title">基本控件之ListView - Flutter学习第五弹</div></div></a></div><div><a href="/2020/06/18/初探Flutter-Flutter学习第一弹/" title="初探Flutter - Flutter学习第一弹"><img class="cover" src="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost/img/flutter_blog.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-18</div><div class="title">初探Flutter - Flutter学习第一弹</div></div></a></div><div><a href="/2020/07/02/基本控件之Container-Flutter学习第三弹/" title="基本控件之Container - Flutter学习第三弹"><img class="cover" src="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost/img/flutter_blog.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-02</div><div class="title">基本控件之Container - Flutter学习第三弹</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">G</span><label><input id="switch-comments-btn" type="checkbox"/><span class="slider"></span></label><span class="second-comment">i</span></div></div><div class="comment-wrap"><div></div><div></div><div></div><div></div><div></div><div></div></div></div></article></main><footer id="footer" style="background-image: url(https://cdn.jsdelivr.net/gh/kaqsice/ImgHost/img/flutter_blog.png)"><div id="footer-wrap"><div class="copyright">&copy;2020 By TranceD</div><div class="framework-info"><span>框架 </span><a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener">Butterfly</a></div><div class="footer_custom_text">欢迎做客TranceD的小屋</div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script>$(function () {
+  $('span.katex-display').wrap('<div class="katex-wrap"></div>')
+})</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    $.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js', function () {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'neutral',
+      })
+      true && mermaid.init()
+    })
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/js/dynamic-title.js"></script> <script src="/live2d/autoload.js"></script><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config_change',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  $('script[data-pjax]').each(function () {
+    $(this).parent().append($(this).remove())
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  if (typeof gtag === 'function') {
+    gtag('config', '', {'page_path': window.location.pathname});
+  }
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+
+document.addEventListener('pjax:send', function () {
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  $(window).off('scroll')
+
+  //reset readmode
+  $('body').hasClass('read-mode') && $('body').removeClass('read-mode')
+
+})</script></div></body></html>

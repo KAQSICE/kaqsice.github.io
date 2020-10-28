@@ -1,0 +1,337 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>数据结构学习笔记 - 栈和队列 | TranceD的小屋</title><meta name="keywords" content="数据结构,c++"><meta name="author" content="TranceD"><meta name="copyright" content="TranceD"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="数据结构栈和队列学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构学习笔记 - 栈和队列">
+<meta property="og:url" content="http://kaqsice.github.io/2020/06/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0---%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/index.html">
+<meta property="og:site_name" content="TranceD的小屋">
+<meta property="og:description" content="数据结构栈和队列学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/06/13/E5tOXYf4F7HqNmc.jpg">
+<meta property="article:published_time" content="2020-06-03T02:17:13.000Z">
+<meta property="article:modified_time" content="2020-10-25T12:51:18.012Z">
+<meta property="article:author" content="TranceD">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="c++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/06/13/E5tOXYf4F7HqNmc.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://kaqsice.github.io/2020/06/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0---%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@800&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '4.2.1',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2020-10-25 20:51:18'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {
+  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }
+})()</script><meta name="generator" content="Hexo 4.2.1"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/coolsheen.gif" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">21</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">10</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">4</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/2020/05/20/%E5%85%B3%E4%BA%8E_tranced%E7%9A%84%E5%B0%8F%E5%B1%8B_/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#栈和队列"><span class="toc-text"> 栈和队列</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#栈"><span class="toc-text"> 栈</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#啥是栈"><span class="toc-text"> 啥是栈?</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#栈的特点"><span class="toc-text"> 栈的特点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#存储结构"><span class="toc-text"> 存储结构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#顺序栈"><span class="toc-text"> 顺序栈</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#代码实现"><span class="toc-text"> 代码实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#共享栈"><span class="toc-text"> 共享栈</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#代码实现-2"><span class="toc-text"> 代码实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基本操作"><span class="toc-text"> 基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#进栈"><span class="toc-text"> 进栈</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#出栈"><span class="toc-text"> 出栈</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链栈"><span class="toc-text"> 链栈</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#代码实现-3"><span class="toc-text"> 代码实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#队列"><span class="toc-text"> 队列</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#啥是队列"><span class="toc-text"> 啥是队列?</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#队列的特点"><span class="toc-text"> 队列的特点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#存储结构-2"><span class="toc-text"> 存储结构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链式队列"><span class="toc-text"> 链式队列</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#代码实现-4"><span class="toc-text"> 代码实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环队列"><span class="toc-text"> 循环队列</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#假溢出"><span class="toc-text"> 假溢出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码实现-5"><span class="toc-text"> 代码实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#递归"><span class="toc-text"> 递归</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-text"> 定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#递归情况"><span class="toc-text"> 递归情况</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义是递归的"><span class="toc-text"> 定义是递归的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据结构是递归的"><span class="toc-text"> 数据结构是递归的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#问题的解决是递归的"><span class="toc-text"> 问题的解决是递归的</span></a></li></ol></li></ol></li></ol></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(https://i.loli.net/2020/06/13/E5tOXYf4F7HqNmc.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">TranceD的小屋</a></span><span id="menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/2020/05/20/%E5%85%B3%E4%BA%8E_tranced%E7%9A%84%E5%B0%8F%E5%B1%8B_/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">数据结构学习笔记 - 栈和队列</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-06-03T02:17:13.000Z" title="发表于 2020-06-03 10:17:13">2020-06-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-10-25T12:51:18.012Z" title="更新于 2020-10-25 20:51:18">2020-10-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="栈和队列"><a class="markdownIt-Anchor" href="#栈和队列"></a> 栈和队列</h1>
+<h2 id="栈"><a class="markdownIt-Anchor" href="#栈"></a> 栈</h2>
+<h5 id="啥是栈"><a class="markdownIt-Anchor" href="#啥是栈"></a> 啥是栈?</h5>
+<p>栈是限定<strong>仅在表尾进行插入或删除操作的线性表</strong>。</p>
+<p>作插入和删除操作的一端称为<strong>栈顶(top)</strong>，另一端称为<strong>栈底(bottom)</strong>。</p>
+<h5 id="栈的特点"><a class="markdownIt-Anchor" href="#栈的特点"></a> 栈的特点</h5>
+<p><strong>后进先出(LIFO)</strong></p>
+<h5 id="存储结构"><a class="markdownIt-Anchor" href="#存储结构"></a> 存储结构</h5>
+<p>栈有两种存储结构，可以用顺序结构或链式结构来实现。</p>
+<h3 id="顺序栈"><a class="markdownIt-Anchor" href="#顺序栈"></a> 顺序栈</h3>
+<p>顺序栈是栈的顺序存储结构，指针top指向<strong>栈顶元素在顺序栈中的下一个位置</strong>，指针base指向栈底位置。(如果有元素进栈会放到top的位置)</p>
+<h4 id="代码实现"><a class="markdownIt-Anchor" href="#代码实现"></a> 代码实现</h4>
+<p>用C++来实现一个顺序栈<code>SeqList</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STACK_INIT_SIZE 100 <span class="comment">//栈存储空间的初始分配量</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STACK_INCREMENT 10  <span class="comment">//栈存储空间的分配增量</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">SeqStack</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    T *base;                <span class="comment">//栈空间基址称为栈底指针，指向栈底位置</span></span><br><span class="line">    T *top;                 <span class="comment">//栈顶指针，约定栈顶指针指向栈顶元素的下一个位置2</span></span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">size</span>;               <span class="comment">//当前分配的栈空间大小</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="共享栈"><a class="markdownIt-Anchor" href="#共享栈"></a> 共享栈</h3>
+<p>共享栈是指程序中定义多个栈，且多个栈共享空间。共享栈在一定程度上减少了空间的浪费。</p>
+<h4 id="代码实现-2"><a class="markdownIt-Anchor" href="#代码实现-2"></a> 代码实现</h4>
+<p>用C++实现共享栈</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 100</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">SharedStack</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    T <span class="built_in">stack</span>[MAX];</span><br><span class="line">    <span class="keyword">int</span> top1 = <span class="number">0</span>, top2 = MAX - <span class="number">1</span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">push1</span><span class="params">(T data)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">push2</span><span class="params">(T data)</span></span>;</span><br><span class="line">    <span class="function">T <span class="title">pop1</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function">T <span class="title">pop2</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="基本操作"><a class="markdownIt-Anchor" href="#基本操作"></a> 基本操作</h4>
+<h5 id="进栈"><a class="markdownIt-Anchor" href="#进栈"></a> 进栈</h5>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">SharedStack</span>&lt;T&gt;:</span>:push1(T data) &#123;</span><br><span class="line">    <span class="keyword">if</span> (top1 &gt; top2) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Overflow"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">stack</span>[top1] = data;</span><br><span class="line">        top1++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">SharedStack</span>&lt;T&gt;:</span>:push2(T data) &#123;</span><br><span class="line">    <span class="keyword">if</span> (top1 &gt; top2) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Overflow"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">stack</span>[top2] = data;</span><br><span class="line">        top2--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="出栈"><a class="markdownIt-Anchor" href="#出栈"></a> 出栈</h5>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">T</span> <span class="title">SharedStack</span>&lt;T&gt;:</span>:pop1() &#123;</span><br><span class="line">    <span class="keyword">if</span> (top1 == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Underflow"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        top1--;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">stack</span>[top1];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">T</span> <span class="title">SharedStack</span>&lt;T&gt;:</span>:pop2() &#123;</span><br><span class="line">    <span class="keyword">if</span> (top2 == MAX - <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Underflow"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        top2++;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">stack</span>[top2];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="链栈"><a class="markdownIt-Anchor" href="#链栈"></a> 链栈</h3>
+<p>链式栈不存在栈满的问题，空间是可以扩充的。</p>
+<p><strong>链栈的栈顶在链头</strong>。</p>
+<h4 id="代码实现-3"><a class="markdownIt-Anchor" href="#代码实现-3"></a> 代码实现</h4>
+<p>用C++实现一个链栈<code>LinkedStack</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">StackNode</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    T data;</span><br><span class="line">    StackNode *next;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">LinkedStack</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    StackNode&lt;T&gt; *top;  <span class="comment">//栈顶指针</span></span><br><span class="line">    <span class="keyword">int</span> length;         <span class="comment">//栈中元素个数</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="队列"><a class="markdownIt-Anchor" href="#队列"></a> 队列</h2>
+<h5 id="啥是队列"><a class="markdownIt-Anchor" href="#啥是队列"></a> 啥是队列?</h5>
+<p>队列是只允许在表的一端插入，在另一端删除的线性表。</p>
+<p>如果把栈看成一个桶，那么队列可以看成一个管道。</p>
+<p><strong>允许插入的一端叫队尾(rear)，允许删除的一端叫队头(front)</strong></p>
+<h5 id="队列的特点"><a class="markdownIt-Anchor" href="#队列的特点"></a> 队列的特点</h5>
+<p><strong>先进先出(FIFO)</strong></p>
+<h5 id="存储结构-2"><a class="markdownIt-Anchor" href="#存储结构-2"></a> 存储结构</h5>
+<p>队列也可以按照顺序存储结构或链式存储结构来进行存储。</p>
+<h3 id="链式队列"><a class="markdownIt-Anchor" href="#链式队列"></a> 链式队列</h3>
+<p>链队列中，有两个分别指向队头和队尾的指针，链式队列在进队的时候没有队满问题，但是有队空问题。</p>
+<h4 id="代码实现-4"><a class="markdownIt-Anchor" href="#代码实现-4"></a> 代码实现</h4>
+<p>用C++实现链队列<code>LinkedQueue</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">QueueNode</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    T data;             <span class="comment">//用于存放队列元素</span></span><br><span class="line">    QueueNode *next;    <span class="comment">//用于存放元素直接后继结点的地址</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">LinkedQueue</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    QueueNode&lt;T&gt; *front;    <span class="comment">//队头指针，指向链表的头结点</span></span><br><span class="line">    QueueNode&lt;T&gt; *rear;     <span class="comment">//队尾指针，指向队尾结点</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="循环队列"><a class="markdownIt-Anchor" href="#循环队列"></a> 循环队列</h3>
+<p>循环队列是队列的顺序存储表示。用一组地址连续的存储单元依次存放队头到队尾的元素，指针front和rear分别指向队头元素的位置和队尾元素下一个元素的位置。</p>
+<h4 id="假溢出"><a class="markdownIt-Anchor" href="#假溢出"></a> 假溢出</h4>
+<p>顺序队列队满时进队会出现假溢出。所以可以通过将顺序队列臆造为一个环形空间，形成一个循环队列来解决问题，即</p>
+<blockquote>
+<p>队头队尾指针加一，可以使用取模的运算实现，</p>
+<p>队头指针进1：front = (front + 1) % maxSize</p>
+<p>队尾指针进1：rear = (rear + 1) % maxSize</p>
+<p>队列初始化：front = rear = 0</p>
+<p>队空条件：front == rear</p>
+<p>队满条件：(rear + 1) % maxSize == front	(这样虽然浪费了一个空间，但是能够解决队空和队满条件判定出现的问题)</p>
+</blockquote>
+<h4 id="代码实现-5"><a class="markdownIt-Anchor" href="#代码实现-5"></a> 代码实现</h4>
+<p>用C++来实现一个循环队列<code>SeqList</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">SeqQueue</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    T *base;        <span class="comment">//初始化时动态分配存储空间的基址</span></span><br><span class="line">    <span class="keyword">int</span> front;      <span class="comment">//队头指针，指向队头元素</span></span><br><span class="line">    <span class="keyword">int</span> rear;       <span class="comment">//队尾指针，指向队尾元素的下一个位置</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="递归"><a class="markdownIt-Anchor" href="#递归"></a> 递归</h2>
+<h3 id="定义"><a class="markdownIt-Anchor" href="#定义"></a> 定义</h3>
+<p>如果一个对象部分地包含它自己，或者用自己给自己定义，就称这个对象是递归的。</p>
+<p>如果一个过程直接或间接地调用自己，那么称这个过程是递归的过程。</p>
+<h3 id="递归情况"><a class="markdownIt-Anchor" href="#递归情况"></a> 递归情况</h3>
+<p>递归分为三种情况</p>
+<ul>
+<li><a href="#%E5%AE%9A%E4%B9%89%E6%98%AF%E9%80%92%E5%BD%92%E7%9A%84">定义是递归的</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%98%AF%E9%80%92%E5%BD%92%E7%9A%84">数据结构是递归的</a></li>
+<li><a href="#%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%98%AF%E9%80%92%E5%BD%92%E7%9A%84">问题的解法是递归的</a></li>
+</ul>
+<h4 id="定义是递归的"><a class="markdownIt-Anchor" href="#定义是递归的"></a> 定义是递归的</h4>
+<p>例如阶乘函数的定义</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">uint64_t</span> <span class="title">getFactorial</span><span class="params">(<span class="keyword">uint64_t</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> n * getFactorial(n - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还有斐波那契数列函数的定义</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">uint64_t</span> <span class="title">getFib</span><span class="params">(<span class="keyword">uint64_t</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> getFib(n - <span class="number">1</span>) + getFib(n - <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="数据结构是递归的"><a class="markdownIt-Anchor" href="#数据结构是递归的"></a> 数据结构是递归的</h4>
+<p>如单链表结构，每个结点的指针域指向的结点与自身结点的类型是一样的。</p>
+<p>例：搜索链表最后一个结点并输出其值</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">T</span> <span class="title">getRear</span>(<span class="title">Node</span> *<span class="title">node</span>) &#123;</span></span><br><span class="line">    <span class="keyword">if</span> (node-&gt;next == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> node-&gt;data;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> getRear&lt;T&gt;(node-&gt;next);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或寻找给定值的结点，并输出其值(代码略)。</p>
+<h4 id="问题的解决是递归的"><a class="markdownIt-Anchor" href="#问题的解决是递归的"></a> 问题的解决是递归的</h4>
+<p>比较典型的例子就是汉诺塔问题的解法。</p>
+<p>如果n = 1，那么将这一个盘子从A柱移动到C柱上。</p>
+<p>否则</p>
+<ol>
+<li>用C柱作为过渡，将A柱上的(n - 1)个盘子移动到B柱上</li>
+<li>将A柱上最后一个盘子直接移动到C柱上</li>
+<li>用A柱做过渡，将B柱上的(n - 1)个盘子移动到C柱上</li>
+</ol>
+<p>算法如下</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">hanoi</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">char</span> x, <span class="keyword">char</span> y, <span class="keyword">char</span> z)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">move</span>(x, <span class="number">1</span>, z);              <span class="comment">//将编号为1的圆盘由x移动到z上</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        hanoi(n - <span class="number">1</span>, x, z, y);      <span class="comment">//将x上编号为1到n-1的圆盘移动到y上</span></span><br><span class="line">        <span class="built_in">move</span>(x, n, z);              <span class="comment">//将编号为n的圆盘直接从x移动到z</span></span><br><span class="line">        hanoi(n - <span class="number">1</span>, y, x, z);      <span class="comment">//将y上编号为1到n-1的圆盘移动到z上</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">TranceD</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://kaqsice.github.io/2020/06/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0---%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/">http://kaqsice.github.io/2020/06/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0---%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://kaqsice.github.io" target="_blank">TranceD的小屋</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><a class="post-meta__tags" href="/tags/c/">c++</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/06/13/E5tOXYf4F7HqNmc.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/06/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0---%E5%AD%97%E7%AC%A6%E4%B8%B2/"><img class="prev-cover" src="https://i.loli.net/2020/06/13/E5tOXYf4F7HqNmc.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">数据结构学习笔记 - 字符串</div></div></a></div><div class="next-post pull-right"><a href="/2020/06/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0---%E7%BA%BF%E6%80%A7%E8%A1%A8/"><img class="next-cover" src="https://i.loli.net/2020/06/13/E5tOXYf4F7HqNmc.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">数据结构学习笔记 - 线性表</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/06/03/数据结构学习笔记---字符串/" title="数据结构学习笔记 - 字符串"><img class="cover" src="https://i.loli.net/2020/06/13/E5tOXYf4F7HqNmc.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-03</div><div class="title">数据结构学习笔记 - 字符串</div></div></a></div><div><a href="/2020/06/03/数据结构学习笔记---数组与广义表/" title="数据结构学习笔记 - 数组与广义表"><img class="cover" src="https://i.loli.net/2020/06/13/E5tOXYf4F7HqNmc.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-03</div><div class="title">数据结构学习笔记 - 数组与广义表</div></div></a></div><div><a href="/2020/06/12/数据结构学习笔记---查找/" title="数据结构学习笔记 - 查找"><img class="cover" src="https://i.loli.net/2020/06/13/E5tOXYf4F7HqNmc.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-12</div><div class="title">数据结构学习笔记 - 查找</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">G</span><label><input id="switch-comments-btn" type="checkbox"/><span class="slider"></span></label><span class="second-comment">i</span></div></div><div class="comment-wrap"><div></div><div></div><div></div><div></div><div></div><div></div></div></div></article></main><footer id="footer" style="background-image: url(https://i.loli.net/2020/06/13/E5tOXYf4F7HqNmc.jpg)"><div id="footer-wrap"><div class="copyright">&copy;2020 By TranceD</div><div class="framework-info"><span>框架 </span><a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener">Butterfly</a></div><div class="footer_custom_text">欢迎做客TranceD的小屋</div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script>$(function () {
+  $('span.katex-display').wrap('<div class="katex-wrap"></div>')
+})</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    $.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js', function () {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'neutral',
+      })
+      true && mermaid.init()
+    })
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/js/dynamic-title.js"></script> <script src="/live2d/autoload.js"></script><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config_change',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  $('script[data-pjax]').each(function () {
+    $(this).parent().append($(this).remove())
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  if (typeof gtag === 'function') {
+    gtag('config', '', {'page_path': window.location.pathname});
+  }
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+
+document.addEventListener('pjax:send', function () {
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  $(window).off('scroll')
+
+  //reset readmode
+  $('body').hasClass('read-mode') && $('body').removeClass('read-mode')
+
+})</script></div></body></html>

@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>操作系统原理实录20201029</title>
+      <link href="/2020/10/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E5%AE%9E%E5%BD%9520201029/"/>
+      <url>/2020/10/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E5%AE%9E%E5%BD%9520201029/</url>
+      
+        <content type="html"><![CDATA[<h1 id="操作系统原理实录sub20201029sub"><a class="markdownIt-Anchor" href="#操作系统原理实录sub20201029sub"></a> 操作系统原理实录<sub>20201029</sub></h1><p><img src="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost@master/img/magicsheen1.gif" alt="MagicPusheen" /></p><h2 id="死锁deadlocks"><a class="markdownIt-Anchor" href="#死锁deadlocks"></a> 死锁(Deadlocks)</h2><h3 id="什么事死锁"><a class="markdownIt-Anchor" href="#什么事死锁"></a> 什么事死锁</h3><blockquote><p>A set of process is deadlocked if each process in the set is waiting for an event that only another process in the set can cause.</p></blockquote><h3 id="死锁的四个条件"><a class="markdownIt-Anchor" href="#死锁的四个条件"></a> 死锁的四个条件</h3><ol><li>互斥(Mutual exclusion condition)</li><li>部分拥有，期待更多(Hold and wait condition)</li><li>不可抢夺(No preemption condition)</li><li>循环等待(Circular wait condition)</li></ol><h3 id="对待死锁的态度和方法"><a class="markdownIt-Anchor" href="#对待死锁的态度和方法"></a> 对待死锁的态度和方法</h3><ol><li><p>就当他不存在(Just ignore the problem)<sub>鸵鸟算法——不二之选</sub></p></li><li><p>发现和恢复(Detection and recovery. Let deadlocks occur, detect them, take action)</p><blockquote><p>沙了最年轻的进程罢(´_ゝ`)</p></blockquote></li><li><p>动态避免(Dynamic avoidance by careful resource allocation)</p></li><li><p>主动预防(Prevention, by structurally negating one of the four required conditions)</p></li></ol><h3 id="银行家算法sup划重点sup"><a class="markdownIt-Anchor" href="#银行家算法sup划重点sup"></a> 银行家算法<sup>划重点</sup></h3><p>不要让系统进入非安全状态。</p><p>具体算法请见课本。</p><h3 id="死锁的预防"><a class="markdownIt-Anchor" href="#死锁的预防"></a> 死锁的预防</h3><ul><li>破坏互斥(Attacking the mutual exclusion condition)<ul><li>假脱机(Spooling)</li></ul></li><li>要么不给，要么都给(Attacking the hold and wait condition)</li><li>抢夺(Attacking the no preemption condition)<sub>不如把它沙了(`ε´ )</sub></li><li>有序分配(Attacking the circular wait condition)</li></ul><h2 id="活锁livelocks"><a class="markdownIt-Anchor" href="#活锁livelocks"></a> 活锁(Livelocks)</h2><p><img src="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost@master/img/79.gif" alt="活锁" /></p><p>已经锁上了，但是都很忙。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 操作系统原理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>GoLang学习日常day0</title>
       <link href="/2020/10/28/Go%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%B8%B8day0/"/>
       <url>/2020/10/28/Go%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%B8%B8day0/</url>

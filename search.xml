@@ -4,6 +4,181 @@
   
     
     <entry>
+      <title>Android简单控件与布局</title>
+      <link href="/2020/11/21/Android%E7%AE%80%E5%8D%95%E6%8E%A7%E4%BB%B6%E4%B8%8E%E5%B8%83%E5%B1%80/"/>
+      <url>/2020/11/21/Android%E7%AE%80%E5%8D%95%E6%8E%A7%E4%BB%B6%E4%B8%8E%E5%B8%83%E5%B1%80/</url>
+      
+        <content type="html"><![CDATA[<h1 id="android简单控件与布局"><a class="markdownIt-Anchor" href="#android简单控件与布局"></a> Android简单控件与布局</h1><h2 id="关于layout"><a class="markdownIt-Anchor" href="#关于layout"></a> 关于Layout</h2><h3 id="什么是layout"><a class="markdownIt-Anchor" href="#什么是layout"></a> 什么是Layout</h3><p><strong>Layout</strong>，翻译成中文即<strong>布局</strong>，Layout决定控件在界面上如何呈现(包括位置，大小，动画等逻辑)。对于Layout，官方给出了如下介绍</p><blockquote><p>布局可定义应用中的界面结构（例如<code>Activity</code>的界面结构）。布局中的所有元素均使用 <code>View</code> 和 <code>ViewGroup</code> 对象的层次结构进行构建。<code>View</code> 通常绘制用户可查看并进行交互的内容。然而，<code>ViewGroup</code> 是不可见容器，用于定义 <code>View</code> 和其他 <code>ViewGroup</code> 对象的布局结构，如图所示。</p><p><img src="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost@master/img/viewgroup_2x.png" alt="View与ViewGroup" /></p><p><code>View</code> 对象通常称为“微件”，可以是众多子类之一，例如 <code>Button</code> 或 <code>TextView</code>。<code>ViewGroup</code> 对象通常称为“布局”，可以是提供其他布局结构的众多类型之一，例如 <code>LinearLayout</code> 或 <code>ConstraintLayout</code>。</p></blockquote><h3 id="我要怎么声明布局呢"><a class="markdownIt-Anchor" href="#我要怎么声明布局呢"></a> 我要怎么声明布局呢?</h3><p>在Android开发中，声明布局有两种方法:</p><ul><li><p>使用<code>XML</code>布局文件声明布局</p><p>这样可以把外观和逻辑分开，使用<code>XML</code>文件还有助于为不同屏幕尺寸和屏幕方向提供不同布局</p><p><img src="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost@master/img/catpusheen_agadvaiaali5kwy.png" alt="XML" /></p></li><li><p>在代码中调整属性</p><p>运行时实例化</p></li></ul><h3 id="关于xml"><a class="markdownIt-Anchor" href="#关于xml"></a> 关于XML</h3><p>啥是<code>XML</code>? 点<a href="https://zh.wikipedia.org/wiki/XML" target="_blank" rel="noopener">这里</a>看维基百科。</p><blockquote><p><strong>可扩展标记语言</strong>（英语：E<strong>x</strong>tensible <strong>M</strong>arkup <strong>L</strong>anguage，简称：<strong>XML</strong>）是一种<a href="https://zh.wikipedia.org/wiki/%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80" target="_blank" rel="noopener">标记语言</a>。标记指<a href="https://zh.wikipedia.org/wiki/%E8%AE%A1%E7%AE%97%E6%9C%BA" target="_blank" rel="noopener">计算机</a>所能理解的信息符号，通过此种标记，<a href="https://zh.wikipedia.org/wiki/%E9%9B%BB%E8%85%A6" target="_blank" rel="noopener">计算机</a>之间可以处理包含各种信息的文章等。如何定义这些标记，既可以选择国际通用的标记语言，比如<a href="https://zh.wikipedia.org/wiki/HTML" target="_blank" rel="noopener">HTML</a>，也可以使用像XML这样由相关人士自由决定的标记语言，这就是语言的可扩展性。<code>XML</code>是从<a href="https://zh.wikipedia.org/wiki/%E6%A0%87%E5%87%86%E9%80%9A%E7%94%A8%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80" target="_blank" rel="noopener">标准通用标记语言</a>（<code>SGML</code>）中简化修改出来的。</p></blockquote><p><strong><code>XML</code>严格区分大小写，有严格的树状结构</strong>。在一个Layout文件中，只能有一个根元素，且必须是<code>View</code>对象或者<code>ViewGroup</code>对象。在编译时，每个<code>XML</code>文件都会被编译成<code>View</code>资源。在<code>Activity</code>的<code>onCreate()</code>回调实现内通过调用<code>setContentView()</code>方法来加载布局(如下)。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"><span class="comment">/* 在一个Activity启动的时候会执行这个方法 */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        <span class="comment">/* 这里载入了activity_main.xml */</span></span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="来写一个布局吧"><a class="markdownIt-Anchor" href="#来写一个布局吧"></a> 来写一个布局吧</h2><h3 id="新建一个布局文件"><a class="markdownIt-Anchor" href="#新建一个布局文件"></a> 新建一个布局文件</h3><p>Android原生应用的资源文件存放在<code>res</code>目录，下面会有很多子目录，不同的目录存放不同类型的资源文件，常用如下:</p><table><thead><tr><th>子目录</th><th>用途</th></tr></thead><tbody><tr><td>drawable/</td><td>存放位图文件（<code>.png</code>、<code>.9.png</code>、<code>.jpg</code>、<code>.gif</code>）或编译为以下可绘制对象资源子类型的 XML 文件</td></tr><tr><td>mipmap/</td><td>存放启动器图标</td></tr><tr><td>layout/</td><td>存放布局文件</td></tr><tr><td>values/</td><td>包含字符串、整型数和颜色等简单值的 <code>XML</code> 文件</td></tr></tbody></table><p>这里要新建一个布局文件，所以在<code>layout/</code>目录下新建一个<code>XML</code>文件即可。</p><p><img src="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost@master/img/Screenshot_20201121_233247.png" alt="注意命名规范哦" /></p><h3 id="xml中的属性"><a class="markdownIt-Anchor" href="#xml中的属性"></a> XML中的属性</h3><p><code>XML</code>的元素中可以包含各种属性，在Android开发中常用的有<code>id</code>、<code>layout_width</code>、<code>layout_height</code>等等。</p><p>不同的控件有不同的特有属性，如<code>ImageView</code>中的<code>src</code>属性(<code>ImageView</code>是用来显示图片的控件，<code>src</code>指定图像文件的路径)</p><h3 id="几种常用的布局"><a class="markdownIt-Anchor" href="#几种常用的布局"></a> 几种常用的布局</h3><h4 id="约束布局constraintlayoutsub永远滴神sub"><a class="markdownIt-Anchor" href="#约束布局constraintlayoutsub永远滴神sub"></a> 约束布局(ConstraintLayout)<s><sub>永远滴神</sub></s></h4><p>约束布局使用约束的方式来指定各个控件的位置关系。</p><p>常用的相对位置属性:</p><p><code>layout_constraintLeft_toLeftOf</code><br /><code>layout_constraintLeft_toRightOf</code><br /><code>layout_constraintRight_toLeftOf</code><br /><code>layout_constraintRight_toRightOf</code><br /><code>layout_constraintTop_toTopOf</code><br /><code>layout_constraintTop_toBottomOf</code><br /><code>layout_constraintBottom_toTopOf</code><br /><code>layout_constraintBottom_toBottomOf</code><br /><code>layout_constraintBaseline_toBaselineOf</code><br /><code>layout_constraintStart_toEndOf</code><br /><code>layout_constraintStart_toStartOf</code><br /><code>layout_constraintEnd_toStartOf</code><br /><code>layout_constraintEnd_toEndOf</code></p><h4 id="线性布局linearlayout"><a class="markdownIt-Anchor" href="#线性布局linearlayout"></a> 线性布局(LinearLayout)</h4><p>线性布局是按照水平或垂直的顺序将子元素(可以是控件或布局)依次按照顺序排列，每一个元素都位于前面一个元素之后。</p><p>线性布局分为两种: 水平方向和垂直方向的布局。分别通过属性<code>android:orientation=&quot;vertical&quot;</code>和<code>android:orientation=&quot;horizontal&quot;</code>来设置。</p><p><code>android:layout_weight</code>表示子元素占据的空间大小的比例。</p><h4 id="相对布局relativelayout"><a class="markdownIt-Anchor" href="#相对布局relativelayout"></a> 相对布局(RelativeLayout)</h4><p><code>RelativeLayout</code>是其按照子元素之间的位置关系完成布局的，非常适合于一些比较复杂的界面设计(<code>ConstraintLayout</code>似乎要更加强大)。</p><p>常用的相对位置属性:</p><p><code>layout_toLeftOf</code><br /><code>layout_toRightOf</code><br /><code>layout_above</code><br /><code>layout_below</code><br /><code>layout_alignParentLeft</code><br /><code>layout_alignParentRight</code><br /><code>layout_alignParentTop</code><br /><code>layout_alignParentBottom</code><br /><code>layout_centerInParent</code><br /><code>layout_centerHorizontal</code><br /><code>layout_centerVertical</code></p><h3 id="常用的控件"><a class="markdownIt-Anchor" href="#常用的控件"></a> 常用的控件</h3><h4 id="显示文字就用textview罢"><a class="markdownIt-Anchor" href="#显示文字就用textview罢"></a> 显示文字，就用TextView罢</h4><p><code>TextView</code>很显然是用来呈现text的控件，主要会用到的属性就是和text相关的属性:</p><table><thead><tr><th>属性</th><th>用途</th></tr></thead><tbody><tr><td><code>text</code></td><td>用来指定显示的文字</td></tr><tr><td><code>textColor</code></td><td>显示文字的颜色</td></tr><tr><td><code>textSize</code></td><td>显示文字的尺寸(<strong>最好使用sp为单位，但不要用作布局尺寸</strong>，关于dp和sp的区别，戳<a href="https://medium.com/@rayacevedo45/android-sp-vs-dp-ca50ad53162d" target="_blank" rel="noopener">这里</a>)</td></tr></tbody></table><p>当然还有大把别的属性，就不多谈了。</p><h4 id="显示图片就用imageview罢"><a class="markdownIt-Anchor" href="#显示图片就用imageview罢"></a> 显示图片，就用ImageView罢</h4><p><code>ImageView</code>用来显示图片，用的比较多的是<code>src</code>属性，用来指定图片的位置。不过原生的<code>ImageView</code>是不支持网图和动图的，所以在加载图片时一般使用第三方框架进行加载(如<code>Glide</code>、<code>Picasso</code><sub>PS: 这货似乎不能加载GIF</sub>)</p><h4 id="显示按钮就用button罢"><a class="markdownIt-Anchor" href="#显示按钮就用button罢"></a> 显示按钮，就用Button罢</h4><p><code>Button</code>就是很普通的按钮，可以像<code>TextView</code>一样直接设置文字。</p><img src="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost@master/img/photo_2020-11-22_00-50-57.jpg" alt="一个普通的按钮" style="zoom: 33%;" /><h4 id="其它常用控件"><a class="markdownIt-Anchor" href="#其它常用控件"></a> 其它常用控件</h4><p>其它还有很多控件如<code>CardView</code>用来显示卡片，<code>EditText</code>用来输入文字等等。</p><p>也有一些使用起来比较复杂的，比如一些需要Adapter才能使用的控件，如显示列表的<code>ListView</code>、更强大的列表<code>RecyclerView</code>以及网格视图<code>GridView</code>等等。</p><p>这些就不详细说明了，想用的时候Google一下用法即可，常用的<code>RecyclerView</code>后面也会做讲解。</p><h2 id="在代码里面修改控件"><a class="markdownIt-Anchor" href="#在代码里面修改控件"></a> 在代码里面修改控件</h2><p>有些时候我们需要在代码中动态的设置控件的属性，比如动态修改<code>TextView</code>的值，设置<code>Button</code>的点击事件等等。那应该如何在代码中找到布局中对应的控件呢？</p><p><img src="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost@master/img/What%20Pusheen.gif" alt="疑惑.gif" /></p><p>这时候之前在控件里设置的<code>id</code>属性就派上用场了。</p><p>现在我们在布局文件中有一只<code>id</code>为button的按钮，我们就可以在代码中声明一个<code>Button</code>对象，使用<code>findViewById()</code>方法来通过<code>id</code>来找到布局文件中的按钮，像下面这样:</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 找到按钮 */</span></span><br><span class="line">Button button = findViewById(R.id.button);</span><br><span class="line"><span class="comment">/* 然后就可以对这个按钮进行修改啦 */</span></span><br><span class="line">button.setText(<span class="string">"这里是button的文字"</span>);</span><br><span class="line"><span class="comment">/* 下面是给按钮加点击事件的写法 */</span></span><br><span class="line">button.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">        Intent i = <span class="keyword">new</span> Intent(FirstActivity.<span class="keyword">this</span>, SecondAcitivity<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        startActivity(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><h2 id="小任务-做一个简单的个人主页ヮ-́"><a class="markdownIt-Anchor" href="#小任务-做一个简单的个人主页ヮ-́"></a> 小任务: 做一个简单的个人主页(`ヮ´)</h2><p>InitActivity里一个简单的<strong>按钮</strong>，点击跳转到MineActivity展示个人信息，包括<strong>头像</strong>、<strong>名字</strong>、<strong>个人介绍</strong>，以及<strong>并排的三个按钮</strong>，点击后分别<strong>Toast</strong>随便一句话。欢迎加入更多操作，想加多少加多少。</p><p>大概就是这样咯。</p><p><img src="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost@master/img/Pusheen%20bye.gif" alt="Bye" /></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 移动开发笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Android </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>操作系统原理实录20201119</title>
+      <link href="/2020/11/19/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E5%AE%9E%E5%BD%9520201119/"/>
+      <url>/2020/11/19/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E5%AE%9E%E5%BD%9520201119/</url>
+      
+        <content type="html"><![CDATA[<h1 id="操作系统原理实录sub20201119sub"><a class="markdownIt-Anchor" href="#操作系统原理实录sub20201119sub"></a> 操作系统原理实录<sub>20201119</sub></h1><h2 id="存储管理storage-management"><a class="markdownIt-Anchor" href="#存储管理storage-management"></a> 存储管理(Storage Management)</h2><h3 id="什么事文件"><a class="markdownIt-Anchor" href="#什么事文件"></a> 什么事文件?</h3><p><strong>基本上</strong>放在外存上的东西都是文件<sub>数据库除外</sub></p><p>文件的定义:</p><blockquote><p>A collection of data.</p><p>A stream of characters or a “byte stream”</p></blockquote><p>文件可以<strong>按名存取</strong></p><p>文件的类型:</p><ul><li>普通文件(Ordinary file)</li><li>目录文件(Directory file)</li><li>特殊文件(Special file)<sub>如设备</sub></li></ul><h3 id="文件的命名"><a class="markdownIt-Anchor" href="#文件的命名"></a> 文件的命名</h3><p>*NIX系统文件名大小写敏感</p><p>Windows系统大小写不敏感</p><h3 id="文件的操作"><a class="markdownIt-Anchor" href="#文件的操作"></a> 文件的操作</h3><ul><li>创建(create)</li><li>删除(delete)</li><li>打开(open)</li><li>关闭(close)</li><li>读取(read)</li><li>写入(write)</li><li>增加(append)</li><li>查找(seek)</li><li>获取标签(get attributes)</li><li>设置标签(set attributes)</li><li>重命名(rename)</li></ul><h3 id="inodes"><a class="markdownIt-Anchor" href="#inodes"></a> Inodes</h3><p>在UNIX系统里，文件可以分为三部分</p><ol><li>文件的名称</li><li>文件的属性</li><li>文件的内容</li></ol><p>文件的属性通过IndexNode存储，即Inode，每个文件只有一个，不存放文件的名字。</p><p>文件的名字存在其所在的目录里。目录的内容就是目录内文件的名字和文件的Inode。</p><p>一个文件是可以有多个名字的，我们把名字叫做Link。</p><p>Inode内会记录一个Link Counter，可以得到该文件的Link数。</p><h3 id="共享文件shared-files"><a class="markdownIt-Anchor" href="#共享文件shared-files"></a> 共享文件(Shared Files)</h3><p><code>ln</code>命令使用</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#硬连接</span></span><br><span class="line">ln source_file target_file</span><br><span class="line"><span class="comment">#目录不能做硬连接</span></span><br><span class="line"><span class="comment">#不能跨文件系统建立硬连接</span></span><br></pre></td></tr></table></figure><blockquote><p><strong>$ls -li</strong></p><p>总用量 0<br />1054885 -rw-r–r-- 1 tranced tranced 0 11月 19 14:12 source</p><p><strong>$ln source target</strong></p><p><strong>$ls -li</strong></p><p>总用量 0<br />1054885 -rw-r–r-- 2 tranced tranced 0 11月 19 14:12 source<br />1054885 -rw-r–r-- 2 tranced tranced 0 11月 19 14:12 target</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#软连接(符号连接)(符号连接找名字)</span></span><br><span class="line">ln -s source_file target_file</span><br></pre></td></tr></table></figure><blockquote><p><strong>$ls -li</strong></p><p>总用量 0<br />1054922 -rw-r–r-- 1 tranced tranced 0 11月 19 14:15 source</p><p><strong>$ln -s source target</strong></p><p><strong>$ls-li</strong></p><p>总用量 4<br />1054922 -rw-r–r-- 1 tranced tranced 0 11月 19 14:15 source<br />1054961 lrwxrwxrwx 1 tranced tranced 6 11月 19 14:19 <strong>target</strong> -&gt; source</p></blockquote><h3 id="存储方式"><a class="markdownIt-Anchor" href="#存储方式"></a> 存储方式</h3><h4 id="顺序存储"><a class="markdownIt-Anchor" href="#顺序存储"></a> 顺序存储</h4><p>适合随机存取</p><p>不方便增删</p><p>容易产生碎片(外碎片)</p><h4 id="链式存储"><a class="markdownIt-Anchor" href="#链式存储"></a> 链式存储</h4><p>方便增删</p><p>不适合随机存取</p><h3 id="既然顺序存储和链式存储都很拉胯那就使用树形结构罢"><a class="markdownIt-Anchor" href="#既然顺序存储和链式存储都很拉胯那就使用树形结构罢"></a> 既然顺序存储和链式存储都很拉胯，那就使用树形结构罢！</h3><p>Linux中Inode大小为128字节，68字节存放文件标签，60字节存放指针，共15个指针。</p><p>12个指针直接指向数据块(设数据块大小1KB<sup>ext4基本上是4KB，最大可以存放约4TB的单文件</sup>)，第13个指针指向一个数据块，数据块中事256个指针，指向256个数据块(256KB)。第14个指针也指向一个数据块，数据块中256个指针每个都指向一个256指针的数据块，即256<sup>2</sup>(64MB)。第15个同理(16GB)。</p><h2 id="文件系统file-systembtrfs永远的神"><a class="markdownIt-Anchor" href="#文件系统file-systembtrfs永远的神"></a> 文件系统(File System)<s>BTRFS永远的神</s></h2><h3 id="ext2"><a class="markdownIt-Anchor" href="#ext2"></a> Ext2</h3><h4 id="superblock"><a class="markdownIt-Anchor" href="#superblock"></a> Superblock</h4><p>ext2的第一块，有一些备份(每8192块)。包含文件系统的关键参数。</p><h4 id="inodes-2"><a class="markdownIt-Anchor" href="#inodes-2"></a> Inodes</h4><p>存放文件的Inode。</p><h4 id="pointer-blocks"><a class="markdownIt-Anchor" href="#pointer-blocks"></a> Pointer blocks</h4><p>存放指针。</p><h4 id="data-blocks"><a class="markdownIt-Anchor" href="#data-blocks"></a> Data blocks</h4><p>存放数据。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 操作系统原理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>操作系统原理实录20201117</title>
+      <link href="/2020/11/17/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E5%AE%9E%E5%BD%9520201117/"/>
+      <url>/2020/11/17/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E5%AE%9E%E5%BD%9520201117/</url>
+      
+        <content type="html"><![CDATA[<h1 id="操作系统原理实录sub20201117sub"><a class="markdownIt-Anchor" href="#操作系统原理实录sub20201117sub"></a> 操作系统原理实录<sub>20201117</sub></h1><h2 id="分段式内存管理"><a class="markdownIt-Anchor" href="#分段式内存管理"></a> 分段式内存管理</h2><h3 id="共享空间"><a class="markdownIt-Anchor" href="#共享空间"></a> 共享空间</h3><p>在分页式管理中可以通过多个页对应同一页帧来实现共享空间。(大部分是共享代码)</p><h3 id="分段segmentation"><a class="markdownIt-Anchor" href="#分段segmentation"></a> 分段(Segmentation)</h3><blockquote><p>与Overlay的区别</p><p>二者都是程序员将程序分成若干部分，Overlay需要程序员自己进行调度，分段则由操作系统完成。</p></blockquote><h3 id="分段页segmentation-with-paging"><a class="markdownIt-Anchor" href="#分段页segmentation-with-paging"></a> 分段页(Segmentation with Paging)</h3><p>进程中有个段表，段中有页表。</p><p>一个段要么都进内存，要么都不进内存。<strong>这样就避免了抖动</strong>。</p><p>但是过于复杂。</p><h2 id="内存管理总结"><a class="markdownIt-Anchor" href="#内存管理总结"></a> 内存管理总结</h2><table><thead><tr><th></th><th>Fixed Partition</th><th>Variable Partition</th><th>Paging</th><th>Segmentation</th><th>Segmentation with Paging</th></tr></thead><tbody><tr><td>Fragmentation</td><td>Internal</td><td>External</td><td>Internal</td><td>External</td><td>Internal</td></tr><tr><td>Continuity</td><td>Whole process</td><td>Whole process</td><td>Page</td><td>Segment</td><td>Page</td></tr><tr><td>Swapping</td><td>Whole process</td><td>Whole process</td><td>Page</td><td>Segment</td><td>Segment</td></tr><tr><td>Relocation</td><td>Base register</td><td>Base register</td><td>Page table</td><td>Segment table</td><td>Segment table with page tables</td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 操作系统原理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>操作系统原理实录20201110</title>
+      <link href="/2020/11/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E5%AE%9E%E5%BD%9520201110/"/>
+      <url>/2020/11/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E5%AE%9E%E5%BD%9520201110/</url>
+      
+        <content type="html"><![CDATA[<h1 id="操作系统原理实录sub20201110sub"><a class="markdownIt-Anchor" href="#操作系统原理实录sub20201110sub"></a> 操作系统原理实录<sub>20201110</sub></h1><h2 id="页面的置换算法page-replacement-algorithms"><a class="markdownIt-Anchor" href="#页面的置换算法page-replacement-algorithms"></a> 页面的置换算法(Page Replacement Algorithms)</h2><p><strong>缺页: 需要的页没有装入物理内存中。</strong></p><p>由于程序的局部性，操作系统才能实现页面的置换。</p><p>当空闲空间大小达到一个阈值时，会触发淘汰机制Page Stealer。</p><h3 id="我想扔页面该怎么扔゚-7"><a class="markdownIt-Anchor" href="#我想扔页面该怎么扔゚-7"></a> 我想扔页面，该怎么扔？(ﾟ∀。)7</h3><ul><li><p>OPT - 最优页面置换算法(Optimal page replacement algorithm)<sup>效率最高的，但是无法实现</sup></p><p>扔掉以后再也用不到的。事个理论算法，可以作为一个标杆，用来事后分析。</p><p><strong>会出计算题</strong></p></li><li><p><s>随便扔<sup>据说还不错</sup></s></p></li><li><p>NRU - 最近未使用(Not recently used page replacement)<sup>挺不咋地的，但是现代操作系统大量使用，简单粗暴</sup></p><p>R位为0，M位为0的最先扔，再扔R位为0，M位为1的。</p></li><li><p>FIFO - 先进先出(First-In, First-Out page replacement)<sup>最拉胯的算法</sup></p><p><strong>会出计算题</strong></p></li><li><p>SC - 第二次机会(Second chance algorithm)<sup>对FIFO的重要改进</sup></p><p>检测先来的进程，如果R位为0，即刻丢掉；如果R位为1，将其R位清零，放在队尾。</p></li><li><p>时钟算法(Clock page replacement)</p><p><s>和 S C 完 全 一 致。</s></p></li><li><p>LRU - 最近最少使用(Least recently used page replacement)<sup>这个事好的</sup></p><p><strong>会出计算题</strong></p><ul><li><p>老化算法(Aging)<sup>LRU的一个近似实现</sup></p><p>每个页面配一个8位的记录值，每个时钟滴答的使用状态记录在最高位(记录前整体右移)，状态会保留8个时钟滴答。</p></li></ul></li><li><p>工作集置换算法(Working set page replacement)</p><p>R位为1的保留，同时把该页面年龄改为当前时间，R位为0的如果页面年龄大于$$的扔掉。</p><ul><li><p>工作集时钟置换算法(WSClock page replacement)</p><p>对工作集置换算法的的改进。</p></li></ul></li></ul><h3 id="百拉迪异常belady-anormaly"><a class="markdownIt-Anchor" href="#百拉迪异常belady-anormaly"></a> 百拉迪异常(Belady anormaly)</h3><p>在某种情况下，给进程分会配更多的页帧，缺页情况可能反而更多。</p><p>只有FIFO会发生百拉迪异常。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 操作系统原理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>操作系统原理实录20201105</title>
+      <link href="/2020/11/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E5%AE%9E%E5%BD%9520201105/"/>
+      <url>/2020/11/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E5%AE%9E%E5%BD%9520201105/</url>
+      
+        <content type="html"><![CDATA[<h1 id="操作系统原理实录sub20201105sub"><a class="markdownIt-Anchor" href="#操作系统原理实录sub20201105sub"></a> 操作系统原理实录<sub>20201105</sub></h1><h2 id="内存管理"><a class="markdownIt-Anchor" href="#内存管理"></a> 内存管理</h2><p>* 金字塔模型 *: 略</p><h3 id="分页式内存管理supsup"><a class="markdownIt-Anchor" href="#分页式内存管理supsup"></a> 分页式内存管理<sup>!!!</sup></h3><h4 id="虚拟内存virtual-memory"><a class="markdownIt-Anchor" href="#虚拟内存virtual-memory"></a> 虚拟内存(Virtual Memory)</h4><h5 id="分页paging"><a class="markdownIt-Anchor" href="#分页paging"></a> 分页(Paging)</h5><p>概念: 把内存空间切成几KB的块(页帧<sub>(Page Frame)</sub>)，放入物理内存(不需要连续)，用页表(Page Table)<sub>是个数组</sub>记录页装到哪个帧里。</p><p><strong>将逻辑地址转化成物理地址</strong>:</p><blockquote><p><strong>把逻辑地址的页号部分用页帧号替换，这样就得到了物理地址啦！</strong></p><p>注意题目中给出多少进制，答案就写多少进制。</p></blockquote><p><strong>内存管理单元Page Entry</strong>:</p><ul><li><p>P位(Present/Absent): 在不在内存</p></li><li><p>M位(Modified): 有没有修改</p></li><li><p>R位(Referenced): 最近有没有用过，该位会定期清零(周期为一个Clock tick)</p></li><li><p>页帧号(Page frame number)</p></li><li><p>…</p></li></ul><h5 id="页表访问"><a class="markdownIt-Anchor" href="#页表访问"></a> 页表访问</h5><p><strong>转译后备缓冲区(TLB)<sub>(Translation Lookaside Buffers)</sub></strong>:  (据说只需要16个在高速缓存中的表项就能使命中率高达95%)</p><p><strong>多级页表(Multilevel Page Tables)</strong>: 把若干个页表分成若干部分，还有一个目录存放页表的位置。即把地址分成多个部分。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 操作系统原理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>操作系统原理实录20201103</title>
+      <link href="/2020/11/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E5%AE%9E%E5%BD%9520201103/"/>
+      <url>/2020/11/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E5%AE%9E%E5%BD%9520201103/</url>
+      
+        <content type="html"><![CDATA[<h1 id="操作系统原理实录sub20201103sub"><a class="markdownIt-Anchor" href="#操作系统原理实录sub20201103sub"></a> 操作系统原理实录<sub>20201103</sub></h1><p><img src="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost@master/img/magicsheen1.gif" alt="Magic Pusheen" /></p><h2 id="内存管理"><a class="markdownIt-Anchor" href="#内存管理"></a> 内存管理</h2><h3 id="内存管理器the-memory-manager"><a class="markdownIt-Anchor" href="#内存管理器the-memory-manager"></a> 内存管理器(The Memory manager)</h3><p><strong>Stack</strong>放局部变量</p><p><strong>Heap</strong>放随机分配的数据</p><h3 id="地址重定位relocation"><a class="markdownIt-Anchor" href="#地址重定位relocation"></a> 地址重定位(Relocation)</h3><ul><li><p>静态地址重定位</p><p>在编译时将逻辑地址翻译成物理地址。</p></li><li><p>动态地址重定位</p><p>使用基址寄存器和界限寄存器</p></li></ul><h3 id="分区"><a class="markdownIt-Anchor" href="#分区"></a> 分区</h3><h4 id="单一分区single-partition-strategies"><a class="markdownIt-Anchor" href="#单一分区single-partition-strategies"></a> 单一分区(Single-Partition Strategies)</h4><p>整个内存里面只有一个进程</p><h4 id="固定分区fixed-partition-strategies"><a class="markdownIt-Anchor" href="#固定分区fixed-partition-strategies"></a> 固定分区(Fixed-Partition Strategies)</h4><p>在操作系统开机时把内存分成大小不相等的空间</p><p>内部碎片(Internal Fragmentation): 分区中被浪费的空间</p><h4 id="可变分区variable-partition-strategies"><a class="markdownIt-Anchor" href="#可变分区variable-partition-strategies"></a> 可变分区(Variable-Partition Strategies)</h4><p>在使用过程中动态分配</p><h3 id="分区策略"><a class="markdownIt-Anchor" href="#分区策略"></a> 分区策略</h3><ul><li>First Fit</li><li>Next Fit</li><li>Best Fit (固定分区)</li><li>Worst Fit (可变分区)</li><li>Quick Fit</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 操作系统原理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>GoLang学习日常day1</title>
+      <link href="/2020/10/30/GoLang%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%B8%B8day1/"/>
+      <url>/2020/10/30/GoLang%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%B8%B8day1/</url>
+      
+        <content type="html"><![CDATA[<h1 id="golang学习日常day1"><a class="markdownIt-Anchor" href="#golang学习日常day1"></a> GoLang学习日常day1</h1><hr /><p><img src="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost@master/img/magicsheen1.gif" alt="学习GoLang" /></p><h2 id="函数定义"><a class="markdownIt-Anchor" href="#函数定义"></a> 函数定义</h2><p>Go语言的函数定义和Kotlin有些类似</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">function</span><span class="params">(parameters)</span> <span class="title">returnTypes</span></span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>不同的是Go的函数可以返回多个值，如</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">swap</span><span class="params">(x, y <span class="keyword">string</span>)</span> <span class="params">(<span class="keyword">string</span>, <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> y, x</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>参数默认采用值传递形式，引用传递需要使用指针</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">swap</span><span class="params">(x *<span class="keyword">int</span>, y *<span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> temp <span class="keyword">int</span></span><br><span class="line">    temp = *x</span><br><span class="line">    *x = *y</span><br><span class="line">    *y = temp</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="数组和列表"><a class="markdownIt-Anchor" href="#数组和列表"></a> 数组和列表</h2><h3 id="数组"><a class="markdownIt-Anchor" href="#数组"></a> 数组</h3><p>Go中声明数组可以用下面的形式声明</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name [size] <span class="keyword">type</span></span><br></pre></td></tr></table></figure><p>在声明时赋值</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = [size] <span class="keyword">type</span> &#123;elements&#125;</span><br></pre></td></tr></table></figure><p>元素访问就是最常见的使用索引访问，这里不多谈！</p><p>Go里面似乎没有方便的<code>forEach()</code>来遍历数组，所以要用for循环来遍历</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> index, element := <span class="keyword">range</span> array &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>多维数组同理，也不多谈！</p><h3 id="列表"><a class="markdownIt-Anchor" href="#列表"></a> 列表</h3><p>在Go的<code>container</code>包中有一些常用的容器类型，这里提一下<code>container/list</code>。</p><p>用起来和其他语言的列表十分相似，用下面的语句创建一个list</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name := list.New()</span><br></pre></td></tr></table></figure><p>遍历也是用for循环</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> element := name.Front(); element != <span class="literal">nil</span>; element = element.Next() &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>详细用法用的时候就知道了，感觉和C++的<code>vector</code>差不多。</p><h2 id="类型转换"><a class="markdownIt-Anchor" href="#类型转换"></a> 类型转换</h2><p>Go的类型转换语句如下</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typeName(expression)</span><br></pre></td></tr></table></figure><p>有点像Python。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> go </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>操作系统原理实录20201029</title>
       <link href="/2020/10/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E5%AE%9E%E5%BD%9520201029/"/>
       <url>/2020/10/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E5%AE%9E%E5%BD%9520201029/</url>
@@ -30,8 +205,8 @@
     
     <entry>
       <title>GoLang学习日常day0</title>
-      <link href="/2020/10/28/Go%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%B8%B8day0/"/>
-      <url>/2020/10/28/Go%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%B8%B8day0/</url>
+      <link href="/2020/10/28/GoLang%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%B8%B8day0/"/>
+      <url>/2020/10/28/GoLang%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%B8%B8day0/</url>
       
         <content type="html"><![CDATA[<h1 id="golang学习日常day0"><a class="markdownIt-Anchor" href="#golang学习日常day0"></a> GoLang学习日常day0</h1><hr /><p>最近突然萌生了学习后端的想法，但是据说PHP好像挺一般的，于是就想学学Go或者Java的Spring Boot。</p><p><img src="https://cdn.jsdelivr.net/gh/kaqsice/ImgHost@master/img/magicsheen1.gif" alt="突然想要学习GoLang.gif" /></p><h2 id="搭建环境"><a class="markdownIt-Anchor" href="#搭建环境"></a> 搭建环境</h2><p>我平时使用的是ArchLinux，所以直接用<code>yay</code>安装<code>go</code>软件包，下完即可使用。在IDE里面我选择了Jetbrains家的GoLand，个人还是比较习惯Jetbrains全家桶的操作习惯(主要是又能白嫖了)。</p><h2 id="第一个go程序"><a class="markdownIt-Anchor" href="#第一个go程序"></a> 第一个Go程序</h2><p>新建一个.go文件，熟悉的包声明语句和包引入语句。函数定义比较不习惯(习惯了Kotlin里面的<code>fun</code>了)，但是其实还是和Kotlin差不多，就是方法名都用的帕斯卡式命名这个比较难以习惯。</p><p>引入<code>fmt</code>包<sub>(这个包提供了类似C语言的格式化输入和输出)</sub>，使用<code>Printf()</code>方法进行格式化输出。</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"><span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">fmt.Printf(<span class="string">"Hello Go!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><sub>在引入包的时候如果没有使用的话会报错，真是神奇的机制。(ﾟ∀。)</sub></p><h2 id="基本数据类型和变量常量"><a class="markdownIt-Anchor" href="#基本数据类型和变量常量"></a> 基本数据类型和变量常量</h2><p>其实就是那几种，常用的就int、float32、float64、string、bool。感觉和C差不多。</p><p>声明变量使用以下形式</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name1, name2, name3 <span class="keyword">type</span></span><br></pre></td></tr></table></figure><p>常量把<code>var</code>换成<code>const</code>。</p><p>或者可以使用<code>:=</code>声明一个变量</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name := value</span><br></pre></td></tr></table></figure><p><strong>注意这里如果<code>:=</code>左面没有声明新的变量会报错</strong></p><p>// TODO: Go里面还有一个有趣的常量<code>iota</code>，这个还是以后再学吧。</p><h2 id="控制语句"><a class="markdownIt-Anchor" href="#控制语句"></a> 控制语句</h2><h3 id="条件判断"><a class="markdownIt-Anchor" href="#条件判断"></a> 条件判断</h3><p>Go中的条件判断有if…else、switch和select</p><h4 id="ifelse"><a class="markdownIt-Anchor" href="#ifelse"></a> if…else</h4><p>用法和大部分语言相同，只是布尔表达式不再用括号包围</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> statement1 &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> statement2 &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="switch"><a class="markdownIt-Anchor" href="#switch"></a> switch</h4><p>写法和C语言基本一致，但是这里每个case后面是默认会break的，如果想实现执行完毕后顺序执行需要写上一句<code>fallthrough</code></p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> variable &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">fallthrough</span></span><br><span class="line">    <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="循环语句"><a class="markdownIt-Anchor" href="#循环语句"></a> 循环语句</h3><p>Go语言使用for进行循环处理，基本写法和C语言的for循环一致，即</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> init; condition; post &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>或者这样写实现类似while的效果</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> condition &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>使用<code>break</code>、<code>continue</code>、<code>goto</code>作为循环控制语句，实现终止循环、跳过本次循环、跳转到其他语句的功能<sub>(这个<code>goto</code>看起来挺有意思的)</sub>。</p><h2 id="没了"><a class="markdownIt-Anchor" href="#没了"></a> 没了</h2><p>今天就学了这么多，感觉还是不习惯Go的一些神必小语法，但是学起来也没那么吃力，和其他语言相似的地方挺多。</p><p>说起来今天中午看油管的时候发现了一个youtuber有在做一个“12分钟学会一门语言”系列的视频，虽然没来得及看完，但是我个人感觉还是不错的。我个人觉得不能在语言的学习上花费太多的时间，毕竟语言只是工具，应该把更多时间花在学习思想上。<s>学过Java和C++之后真是学啥都轻松(*ﾟ∀ﾟ*)<sub>(除了汇编)</sub>。</s></p>]]></content>
       
@@ -242,7 +417,7 @@
       
       <categories>
           
-          <category> 大战Flutter系列 </category>
+          <category> 移动开发笔记 </category>
           
       </categories>
       
@@ -269,7 +444,7 @@
       
       <categories>
           
-          <category> 大战Flutter系列 </category>
+          <category> 移动开发笔记 </category>
           
       </categories>
       
@@ -296,7 +471,7 @@
       
       <categories>
           
-          <category> 大战Flutter系列 </category>
+          <category> 移动开发笔记 </category>
           
       </categories>
       
@@ -323,7 +498,7 @@
       
       <categories>
           
-          <category> 大战Flutter系列 </category>
+          <category> 移动开发笔记 </category>
           
       </categories>
       
@@ -350,7 +525,7 @@
       
       <categories>
           
-          <category> 大战Flutter系列 </category>
+          <category> 移动开发笔记 </category>
           
       </categories>
       
